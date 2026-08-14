@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dinner Invitation</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           BACKGROUND
+           ========================= */
+
+        .invitation {
+
+            min-height: 100vh;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(0, 0, 0, 0.35),
+                    rgba(0, 0, 0, 0.35)
+                ),
+
+                url("images/coffee.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            color: white;
+        }
+
+
+        /* =========================
+           CONTENT
+           ========================= */
+
+        .content {
+
+            padding: 30px;
+
+            max-width: 600px;
+
+        }
+
+
+        h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        #message {
+
+            font-size: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           BUTTON
+           ========================= */
+
+        button {
+
+            padding: 12px 24px;
+
+            margin: 10px;
+
+            font-size: 18px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        #yesButton {
+
+            background-color: #ff6b81;
+
+            color: white;
+
+        }
+
+
+        #noButton {
+
+            background-color: white;
+
+            color: #333;
+
+        }
+
+
+        /* =========================
+           HIDDEN
+           ========================= */
+
+        .hidden {
+
+            display: none;
+
+        }
+
+
+        /* =========================
+           FADE OUT
+           ========================= */
+
+        .fade-out {
+
+            animation:
+                fadeOut 0.8s
+                ease forwards;
+
+        }
+
+
+        @keyframes fadeOut {
+
+            from {
+
+                opacity: 1;
+
+            }
+
+            to {
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* =========================
+           FADE IN
+           ========================= */
+
+        .fade-in {
+
+            animation:
+                fadeIn 1s
+                ease forwards;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================
+           SUCCESS
+           ========================= */
+
+        #success {
+
+            width: 100%;
+
+            position: relative;
+
+        }
+
+
+        /* =========================
+           YEEYY
+           ========================= */
+
+        #yayText {
+
+            margin: 0;
+
+            font-size: 70px;
+
+            opacity: 0;
+
+            transform:
+                translateY(40px)
+                scale(1.3);
+
+        }
+
+
+        /* YEEYY MUNCUL */
+
+        .yay-show {
+
+            animation:
+                yayShow 1s
+                ease forwards;
+
+        }
+
+
+        @keyframes yayShow {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(40px)
+                    scale(1.3);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* YEEYY NAIK DAN MENGECIL */
+
+        .yay-move {
+
+            animation:
+                yayMoveUp 1.2s
+                cubic-bezier(
+                    0.65,
+                    0,
+                    0.35,
+                    1
+                )
+                forwards;
+
+        }
+
+
+        @keyframes yayMoveUp {
+
+            from {
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+            to {
+
+                transform:
+                    translateY(-90px)
+                    scale(0.65);
+
+            }
+
+        }
+
+
+        /* =========================
+           DETAIL
+           ========================= */
+
+        #details {
+
+            opacity: 0;
+
+            margin-top: -30px;
+
+        }
+
+
+        .details-show {
+
+            animation:
+                detailsAppear 1s
+                ease forwards;
+
+        }
+
+
+        @keyframes detailsAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(30px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================
+           WELCOME TEXT
+           ========================= */
+
+        #welcomeText {
+
+            opacity: 0;
+
+        }
+
+
+        #welcomeText.show {
+
+            animation:
+                textAppear 0.8s
+                ease forwards;
+
+        }
+
+
+        /* =========================
+           EVENT DETAIL
+           ========================= */
+
+        .event-detail p {
+
+            opacity: 0;
+
+            margin: 14px 0;
+
+        }
+
+
+        .event-detail p.show {
+
+            animation:
+                textAppear 0.8s
+                ease forwards;
+
+        }
+
+
+        /* =========================
+           CLOSING
+           ========================= */
+
+        #closing {
+
+            opacity: 0;
+
+            margin-top: 30px;
+
+        }
+
+
+        #closing.show {
+
+            animation:
+                textAppear 1s
+                ease forwards;
+
+        }
+
+
+        /* =========================
+           TEXT APPEAR
+           ========================= */
+
+        @keyframes textAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(15px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 600px) {
+
+            #yayText {
+
+                font-size: 50px;
+
+            }
+
+
+            .content {
+
+                padding: 20px;
+
+            }
+
+
+            h1 {
+
+                font-size: 32px;
+
+            }
+
+
+            #message {
+
+                font-size: 17px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+    <div class="invitation">
+
+
+        <div class="content">
+
+
+            <!-- =====================
+                 OPENING
+                 ===================== -->
+
+            <div id="opening">
+
+
+                <h1>
+
+                    gas Ngopi di 
+                    Akar Coffee Kamojang? 🍽️
+
+                </h1>
+
+
+                <p id="message">
+
+                    I have a little invitation
+                    for you...
+
+                </p>
+
+
+                <button id="yesButton">
+
+                    YES ❤️
+
+                </button>
+
+
+                <button id="noButton">
+
+                    NO 😢
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =====================
+                 SUCCESS
+                 ===================== -->
+
+            <div id="success" class="hidden">
+
+
+                <h1 id="yayText">
+
+                    YEEYY! ❤️🥹
+
+                </h1>
+
+
+
+                <div id="details">
+
+
+                    <p id="welcomeText">
+
+                        Ditunggu yah kedatangannya,
+
+                    </p>
+
+
+
+                    <div class="event-detail">
+
+
+                        <p>
+
+                            <strong>
+                                Hari
+                            </strong>
+
+                            <span>
+                                Selasa, 18 Agustus 2026
+                            </span>
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Jam
+                            </strong>
+
+                            <span>
+                                5.00 PM
+                            </span>
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Tempat
+                            </strong>
+
+                            <span>
+                                Akar Coffee
+                            </span>
+
+                        </p>
+
+
+                    </div>
+
+
+
+                    <p id="closing">
+
+                        See You Later Guyyysss... ☕️
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =========================
+           VARIABLES
+           ========================= */
+
+        let noClicks = 0;
+
+
+        const yesButton =
+            document.getElementById(
+                "yesButton"
+            );
+
+
+        const noButton =
+            document.getElementById(
+                "noButton"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+
+        /* =========================
+           NO BUTTON
+           ========================= */
+
+        noButton.addEventListener(
+            "click",
+            function() {
+
+
+                noClicks++;
+
+
+                /* YES SEMAKIN BESAR */
+
+                yesButton.style.fontSize =
+                    (18 + noClicks * 8)
+                    + "px";
+
+
+
+                /* PESAN BERUBAH */
+
+                if (noClicks === 1) {
+
+                    message.textContent =
+                        "Yakin gak mau? 🥺";
+
+                }
+
+
+                else if (noClicks === 2) {
+
+                    message.textContent =
+                        "Masa iya gak mau? 😭";
+
+                }
+
+
+                else if (noClicks === 3) {
+
+                    message.textContent =
+                        "Pleaseee? 🥹👉👈";
+
+                }
+
+
+                else if (noClicks === 4) {
+
+                    message.textContent =
+                        "Nanti aku traktir gope doang deh... 🍝🥺";
+
+                }
+
+
+                else if (noClicks >= 5) {
+
+                    message.textContent =
+                        "Don't break my heart 💔😭";
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================
+           YES BUTTON
+           ========================= */
+
+        yesButton.addEventListener(
+            "click",
+            function() {
+
+
+                const opening =
+                    document.getElementById(
+                        "opening"
+                    );
+
+
+                const success =
+                    document.getElementById(
+                        "success"
+                    );
+
+
+                const yayText =
+                    document.getElementById(
+                        "yayText"
+                    );
+
+
+                const details =
+                    document.getElementById(
+                        "details"
+                    );
+
+
+                const welcomeText =
+                    document.getElementById(
+                        "welcomeText"
+                    );
+
+
+                const detailItems =
+                    document.querySelectorAll(
+                        ".event-detail p"
+                    );
+
+
+                const closing =
+                    document.getElementById(
+                        "closing"
+                    );
+
+
+
+                /* =====================
+                   1. OPENING FADE OUT
+                   ===================== */
+
+                opening.classList.add(
+                    "fade-out"
+                );
+
+
+
+                /* =====================
+                   2. TUNGGU FADE OUT
+                   ===================== */
+
+                setTimeout(
+                    function() {
+
+
+                        opening.style.display =
+                            "none";
+
+
+
+                        /* =================
+                           3. SUCCESS MUNCUL
+                           ================= */
+
+                        success.classList.remove(
+                            "hidden"
+                        );
+
+
+
+                        /* YEEYY MUNCUL */
+
+                        yayText.classList.add(
+                            "yay-show"
+                        );
+
+
+
+                        /* =================
+                           4. YEEYY NAIK
+                           ================= */
+
+                        setTimeout(
+                            function() {
+
+
+                                yayText.classList.remove(
+                                    "yay-show"
+                                );
+
+
+                                yayText.classList.add(
+                                    "yay-move"
+                                );
+
+
+                            },
+                            1400
+                        );
+
+
+
+                        /* =================
+                           5. DETAIL MUNCUL
+                           ================= */
+
+                        setTimeout(
+                            function() {
+
+
+                                details.classList.add(
+                                    "details-show"
+                                );
+
+
+                            },
+                            2300
+                        );
+
+
+
+                        /* =================
+                           6. WELCOME TEXT
+                           ================= */
+
+                        setTimeout(
+                            function() {
+
+
+                                welcomeText.classList.add(
+                                    "show"
+                                );
+
+
+                            },
+                            2700
+                        );
+
+
+
+                        /* =================
+                           7. DETAIL SATU-SATU
+                           ================= */
+
+                        setTimeout(
+                            function() {
+
+
+                                detailItems[0].classList.add(
+                                    "show"
+                                );
+
+
+                            },
+                            3100
+                        );
+
+
+                        setTimeout(
+                            function() {
+
+
+                                detailItems[1].classList.add(
+                                    "show"
+                                );
+
+
+                            },
+                            3500
+                        );
+
+
+                        setTimeout(
+                            function() {
+
+
+                                detailItems[2].classList.add(
+                                    "show"
+                                );
+
+
+                            },
+                            3900
+                        );
+
+
+
+                        /* =================
+                           8. CLOSING
+                           ================= */
+
+                        setTimeout(
+                            function() {
+
+
+                                closing.classList.add(
+                                    "show"
+                                );
+
+
+                            },
+                            4400
+                        );
+
+
+                    },
+                    800
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
